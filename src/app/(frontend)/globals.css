@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+/* Fallback tokens (overridden at runtime by the Brand global, injected in layout). */
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --brand-primary: #ff5722;
+  --brand-secondary: #e31fc8;
+  --font-display: var(--font-boldonse), "Archivo Black", system-ui, sans-serif;
+  --font-body: var(--font-archivo), system-ui, sans-serif;
+  --font-mono-stack: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--brand-primary);
+  --color-secondary: var(--brand-secondary);
+
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-display);
+  --font-mono: var(--font-mono-stack);
+
+  /* Fluid type scale (clamp: min, preferred, max) */
+  --text-fluid-sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
+  --text-fluid-base: clamp(1rem, 0.92rem + 0.4vw, 1.125rem);
+  --text-fluid-lg: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
+  --text-fluid-xl: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
+  --text-fluid-2xl: clamp(2.5rem, 1.8rem + 3.4vw, 4rem);
+  --text-fluid-3xl: clamp(3rem, 2rem + 5vw, 6.5rem);
+}
+
+* {
+  border-color: color-mix(in oklab, var(--foreground) 12%, transparent);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Boldonse is a single very-heavy display weight — give headings room to breathe. */
+.font-heading {
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+}
+
+/* Brand gradient text utility (primary → secondary) */
+.text-brand-gradient {
+  background-image: linear-gradient(100deg, var(--brand-primary), var(--brand-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Faint editorial grid backdrop (matches the old site's print feel) */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--foreground) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--foreground) 5%, transparent) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* Infinite marquee (CSS-only, server-renderable) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 34s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-marquee { animation: none; }
+}
