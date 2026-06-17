@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
 import { useMotionConfig } from "./MotionProvider";
@@ -13,10 +13,14 @@ type RevealProps = {
 
 /**
  * Scroll-triggered reveal. Distance/duration scale with Brand.animationIntensity.
- * Do not wrap the LCP hero heading in this.
+ * Do not wrap the LCP hero heading in this. Under prefers-reduced-motion the
+ * content renders visible immediately (no transform) — keeping it available to
+ * assistive tech and contrast audits.
  */
 export function Reveal({ children, className, delay = 0 }: RevealProps) {
   const cfg = useMotionConfig();
+  const reduce = useReducedMotion();
+  if (reduce) return <div className={className}>{children}</div>;
   return (
     <motion.div
       className={className}

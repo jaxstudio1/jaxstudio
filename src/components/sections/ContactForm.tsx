@@ -31,7 +31,7 @@ export function ContactForm({
   }
 
   const inputClass =
-    "w-full rounded-lg border border-foreground/15 bg-background px-4 py-3 text-sm outline-none transition placeholder:text-foreground/40 focus:border-primary/60";
+    "w-full rounded-lg border border-foreground/15 bg-background px-4 py-3 text-sm outline-none transition placeholder:text-foreground/55 focus:border-primary/60";
 
   return (
     <form
@@ -86,7 +86,7 @@ export function ContactForm({
         type="submit"
         disabled={pending}
         data-testid="contact-submit"
-        className="mt-6 w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-[0_0_40px_-8px_var(--brand-primary)] transition hover:opacity-90 disabled:opacity-50"
+        className="mt-6 w-full rounded-full bg-primary px-6 py-3 text-sm font-semibold text-background shadow-[0_0_40px_-8px_var(--brand-primary)] transition hover:opacity-90 disabled:opacity-50"
       >
         {pending ? "Sending…" : "Send message →"}
       </button>

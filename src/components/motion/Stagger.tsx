@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
 import { useMotionConfig } from "./MotionProvider";
@@ -19,6 +19,8 @@ export function Stagger({
   onLoad?: boolean;
 }) {
   const cfg = useMotionConfig();
+  const reduce = useReducedMotion();
+  if (reduce) return <div className={className}>{children}</div>;
   const parent: Variants = {
     hidden: {},
     show: { transition: { staggerChildren: cfg.stagger, delayChildren: 0.05 } },
@@ -43,6 +45,8 @@ export function StaggerItem({
   className?: string;
 }) {
   const cfg = useMotionConfig();
+  const reduce = useReducedMotion();
+  if (reduce) return <div className={className}>{children}</div>;
   const item: Variants = {
     hidden: { opacity: 0, y: cfg.y },
     show: {

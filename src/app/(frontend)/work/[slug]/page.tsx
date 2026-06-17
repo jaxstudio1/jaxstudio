@@ -121,7 +121,7 @@ export default async function ProjectPage({
         )}
 
         <div className="mt-16 border-t border-foreground/10 pt-10">
-          <Link href="/#contact" className="rounded-full bg-primary px-7 py-3 text-sm font-semibold text-white transition hover:opacity-90">
+          <Link href="/#contact" className="rounded-full bg-primary px-7 py-3 text-sm font-semibold text-background transition hover:opacity-90">
             Start a project →
           </Link>
         </div>

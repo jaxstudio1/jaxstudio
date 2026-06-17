@@ -38,7 +38,7 @@ export function Hero({ hero }: { hero: HeroType }) {
             {hero.primaryCtaLabel && (
               <a
                 href={hero.primaryCtaLink ?? "#work"}
-                className="rounded-full bg-primary px-7 py-3 text-sm font-semibold text-white shadow-[0_0_45px_-8px_var(--brand-primary)] transition hover:opacity-90"
+                className="rounded-full bg-primary px-7 py-3 text-sm font-semibold text-background shadow-[0_0_45px_-8px_var(--brand-primary)] transition hover:opacity-90"
               >
                 {hero.primaryCtaLabel} →
               </a>

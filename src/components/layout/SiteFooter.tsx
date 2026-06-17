@@ -51,7 +51,7 @@ export function SiteFooter({ settings }: { settings: SiteSetting }) {
       </div>
 
       {settings.footerNote && (
-        <p className="mx-auto mt-10 max-w-6xl px-6 text-center text-xs text-foreground/50 sm:text-left">
+        <p className="mx-auto mt-10 max-w-6xl px-6 text-center text-xs text-foreground/60 sm:text-left">
           {settings.footerNote}
         </p>
       )}

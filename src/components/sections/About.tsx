@@ -72,7 +72,7 @@ export function About({ about }: { about: AboutType }) {
 
             {skills.length > 0 && (
               <div className="mt-10">
-                <h4 className="mb-5 font-mono text-xs uppercase tracking-[0.25em] text-foreground/50">
+                <h4 className="mb-5 font-mono text-xs uppercase tracking-[0.25em] text-foreground/60">
                   Core skills
                 </h4>
                 <SkillBars skills={skills} />
@@ -81,7 +81,7 @@ export function About({ about }: { about: AboutType }) {
 
             {tools.length > 0 && (
               <div className="mt-10">
-                <h4 className="mb-4 font-mono text-xs uppercase tracking-[0.25em] text-foreground/50">
+                <h4 className="mb-4 font-mono text-xs uppercase tracking-[0.25em] text-foreground/60">
                   Tools & software
                 </h4>
                 <div className="flex flex-wrap gap-2">

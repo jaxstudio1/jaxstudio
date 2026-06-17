@@ -27,7 +27,7 @@ export function Services({ services }: { services: Service[] }) {
                     <ServiceIcon name={s.icon} className="h-5 w-5" />
                   </span>
                   {s.number && (
-                    <span className="font-mono text-xs text-foreground/30">{s.number}</span>
+                    <span className="font-mono text-xs text-foreground/55">{s.number}</span>
                   )}
                 </div>
                 <h3 className="mt-5 font-heading text-lg font-semibold">{s.title}</h3>

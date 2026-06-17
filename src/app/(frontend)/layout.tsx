@@ -14,7 +14,14 @@ import { MotionProvider } from "@/components/motion/MotionProvider";
 import { getBrand, getSiteSettings } from "@/lib/data";
 import "./globals.css";
 
-const boldonse = Boldonse({ subsets: ["latin"], weight: "400", variable: "--font-boldonse" });
+const boldonse = Boldonse({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-boldonse",
+  // Boldonse has no metric data in next/font for an auto-adjusted fallback;
+  // disable it to avoid the build warning (our CSS stack provides the fallback).
+  adjustFontFallback: false,
+});
 const bricolage = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-bricolage" });
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
 const anton = Anton({ subsets: ["latin"], weight: "400", variable: "--font-anton" });

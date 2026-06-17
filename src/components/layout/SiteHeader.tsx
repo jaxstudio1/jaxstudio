@@ -90,7 +90,7 @@ export function SiteHeader({
             <Link
               href="/#contact"
               onClick={() => setOpen(false)}
-              className="mt-2 inline-block w-fit rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white"
+              className="mt-2 inline-block w-fit rounded-full bg-primary px-4 py-2 text-sm font-semibold text-background"
             >
               Start a project →
             </Link>

@@ -1,6 +1,20 @@
 import { getPayload } from 'payload'
 
 import config from './payload.config'
+import type { ProjectCategory } from './lib/categories'
+
+type SeedProject = {
+  title: string
+  slug: string
+  category: ProjectCategory
+  year: number
+  order: number
+  featured: boolean
+  client: string
+  role: string
+  summary: string
+  tags: { label: string }[]
+}
 
 const services = [
   { order: 1, number: '01', icon: 'pen-tool', title: 'Brand Identity', description: 'Logos, visual systems, and brand guidelines that give your business a memorable, professional identity across every touchpoint.' },
@@ -11,7 +25,7 @@ const services = [
   { order: 6, number: '06', icon: 'code', title: 'Full-Stack Development', description: 'From idea to deployed product — Next.js apps, CMS integrations, dashboards, and the infrastructure behind them.' },
 ]
 
-const projects = [
+const projects: SeedProject[] = [
   {
     title: 'Aurora Coffee — Brand & Site', slug: 'aurora-coffee', category: 'web-app', year: 2026, order: 1, featured: true,
     client: 'Aurora Coffee Co.', role: 'Design + Build',

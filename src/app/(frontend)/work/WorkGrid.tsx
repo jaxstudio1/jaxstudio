@@ -29,7 +29,7 @@ export function WorkGrid({ projects }: { projects: Project[] }) {
       aria-pressed={active === value}
       className={`rounded-full border px-4 py-2 text-sm transition ${
         active === value
-          ? "border-primary bg-primary text-white"
+          ? "border-primary bg-primary text-background"
           : "border-foreground/15 text-foreground/70 hover:border-foreground/30 hover:text-foreground"
       }`}
     >
