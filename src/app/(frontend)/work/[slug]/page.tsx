@@ -60,7 +60,7 @@ export default async function ProjectPage({
           {project.client && <span>· {project.client}</span>}
         </div>
 
-        <h1 className="mt-5 font-heading text-fluid-2xl font-bold uppercase leading-[0.95]">
+        <h1 className="mt-5 font-heading text-fluid-2xl font-bold uppercase">
           {project.title}
         </h1>
         <p className="mt-5 max-w-2xl text-fluid-lg leading-relaxed text-foreground/75">

@@ -12,7 +12,7 @@ export function Contact({ contact }: { contact: ContactType }) {
           <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-primary">
             {contact.eyebrow ?? "Get in touch"}
           </p>
-          <h2 className="font-heading text-fluid-2xl font-bold uppercase leading-[0.95]">
+          <h2 className="font-heading text-fluid-2xl font-bold uppercase">
             {contact.heading ?? "Let's make something good."}
           </h2>
           {contact.blurb && (

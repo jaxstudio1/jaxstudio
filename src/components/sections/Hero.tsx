@@ -19,7 +19,7 @@ export function Hero({ hero }: { hero: HeroType }) {
         )}
 
         {/* LCP element — rendered statically (no opacity gate) for fast paint. */}
-        <h1 className="font-heading text-fluid-3xl font-bold uppercase leading-[0.92]">
+        <h1 className="font-heading text-fluid-3xl font-bold uppercase">
           {parts.map((p, i) => (
             <span key={i} className={p.emphasized ? "text-brand-gradient" : undefined}>
               {p.text}

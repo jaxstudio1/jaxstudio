@@ -46,14 +46,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Boldonse carries tall vertical metrics, so this tight line-height is the
-   intended look only for LARGE multi-line display headings. It lives in
-   @layer base so per-element `leading-*` utilities win on smaller text (hero
-   stats, card titles), where a 0.95 line box clips the glyphs top & bottom. */
+/* Boldonse has very tall vertical metrics (its glyph box is ~1.4x the font
+   size), so a tight line-height makes multi-line headings overlap and clips
+   single lines. Default display text to the font's natural line-height; tune
+   per-element with `leading-*` only where it stays clear of the glyphs. */
 @layer base {
   .font-heading {
     letter-spacing: -0.01em;
-    line-height: 0.95;
+    line-height: normal;
   }
 }
 

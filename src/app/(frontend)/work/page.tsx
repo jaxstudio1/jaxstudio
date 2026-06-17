@@ -18,7 +18,7 @@ export default async function WorkPage() {
         <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-primary">
           Portfolio
         </p>
-        <h1 className="font-heading text-fluid-3xl font-bold uppercase leading-[0.92]">
+        <h1 className="font-heading text-fluid-3xl font-bold uppercase">
           Selected <span className="text-brand-gradient">work</span>
         </h1>
         <p className="mt-6 max-w-2xl text-fluid-base leading-relaxed text-foreground/70">
