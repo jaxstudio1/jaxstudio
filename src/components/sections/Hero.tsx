@@ -59,7 +59,7 @@ export function Hero({ hero }: { hero: HeroType }) {
             <dl className="mt-16 grid max-w-2xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-foreground/10 bg-foreground/5 sm:grid-cols-4">
               {stats.map((s, i) => (
                 <div key={i} className="bg-background p-5">
-                  <dt className="font-heading text-2xl font-bold text-brand-gradient">{s.value}</dt>
+                  <dt className="font-heading text-2xl font-bold leading-normal text-brand-gradient">{s.value}</dt>
                   <dd className="mt-1 text-xs uppercase tracking-wider text-foreground/55">
                     {s.label}
                   </dd>

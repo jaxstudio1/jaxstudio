@@ -24,7 +24,7 @@ export function ContactForm({
         <div className="flex h-14 w-14 items-center justify-center rounded-full border border-primary/40 bg-primary/10 text-2xl text-primary">
           ✓
         </div>
-        <div className="mt-4 font-heading text-2xl font-bold text-brand-gradient">Message received.</div>
+        <div className="mt-4 font-heading text-2xl font-bold leading-normal text-brand-gradient">Message received.</div>
         <p className="mt-2 max-w-xs text-sm text-foreground/60">{successMessage}</p>
       </div>
     );

@@ -30,7 +30,7 @@ export function Services({ services }: { services: Service[] }) {
                     <span className="font-mono text-xs text-foreground/55">{s.number}</span>
                   )}
                 </div>
-                <h3 className="mt-5 font-heading text-lg font-semibold">{s.title}</h3>
+                <h3 className="mt-5 font-heading text-lg font-semibold leading-snug">{s.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-foreground/65">{s.description}</p>
               </div>
             </StaggerItem>

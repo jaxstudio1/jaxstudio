@@ -45,7 +45,7 @@ export function About({ about }: { about: AboutType }) {
                 )}
               </div>
               <div className="mt-5">
-                <h3 className="font-heading text-xl font-semibold">{name}</h3>
+                <h3 className="font-heading text-xl font-semibold leading-snug">{name}</h3>
                 <p className="mt-1 text-sm text-foreground/60">{about.role}</p>
                 <div className="mt-3 flex flex-wrap gap-2 text-xs">
                   {about.location && (

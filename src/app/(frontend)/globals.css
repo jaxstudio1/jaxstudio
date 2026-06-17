@@ -46,10 +46,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Boldonse is a single very-heavy display weight — give headings room to breathe. */
-.font-heading {
-  letter-spacing: -0.01em;
-  line-height: 0.95;
+/* Boldonse carries tall vertical metrics, so this tight line-height is the
+   intended look only for LARGE multi-line display headings. It lives in
+   @layer base so per-element `leading-*` utilities win on smaller text (hero
+   stats, card titles), where a 0.95 line box clips the glyphs top & bottom. */
+@layer base {
+  .font-heading {
+    letter-spacing: -0.01em;
+    line-height: 0.95;
+  }
 }
 
 /* Brand gradient text utility (primary → secondary) */
