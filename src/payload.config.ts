@@ -48,6 +48,11 @@ export default buildConfig({
       enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
       collections: { media: true },
       token: process.env.BLOB_READ_WRITE_TOKEN,
+      // Upload straight from the browser to Blob. Without this, files stream
+      // through the serverless function, which Vercel caps at 4.5MB — design
+      // images blow past that and the admin shows "something went wrong".
+      // (next.config.ts already stubs the client upload handler's Node deps.)
+      clientUploads: true,
     }),
   ],
   typescript: {
