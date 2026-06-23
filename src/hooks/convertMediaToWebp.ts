@@ -1,6 +1,6 @@
 import type { CollectionAfterChangeHook } from 'payload'
 import sharp from 'sharp'
-import { del, put } from '@vercel/blob'
+import { del, head, put } from '@vercel/blob'
 
 /**
  * Post-upload image optimization for the Media collection.
@@ -47,8 +47,12 @@ export const convertMediaToWebp: CollectionAfterChangeHook = async ({ doc, req }
   if (!CONVERTIBLE.has(mimeType)) return doc
 
   try {
-    // 1. Pull the original back from Blob (server→Blob egress is uncapped).
-    const res = await fetch(url)
+    // 1. Resolve the real Blob URL and pull the original back (server→Blob
+    //    egress is uncapped). doc.url can be a relative Payload proxy path
+    //    (/api/media/file/<name>) when access control is on, which fetch()
+    //    can't parse — so look the blob up by pathname via head() instead.
+    const meta = await head(filename, { token })
+    const res = await fetch(meta.url)
     if (!res.ok) throw new Error(`could not fetch original (HTTP ${res.status})`)
     const input = Buffer.from(await res.arrayBuffer())
 
@@ -96,7 +100,7 @@ export const convertMediaToWebp: CollectionAfterChangeHook = async ({ doc, req }
 
     // 5. Drop the now-orphaned original to actually reclaim space.
     if (webpFilename !== filename) {
-      await del(url, { token })
+      await del(filename, { token })
     }
 
     req.payload.logger.info(
