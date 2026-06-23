@@ -48,11 +48,13 @@ export default buildConfig({
       enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
       collections: { media: true },
       token: process.env.BLOB_READ_WRITE_TOKEN,
-      // Upload straight from the browser to Blob. Without this, files stream
-      // through the serverless function, which Vercel caps at 4.5MB — design
-      // images blow past that and the admin shows "something went wrong".
-      // (next.config.ts already stubs the client upload handler's Node deps.)
-      clientUploads: true,
+      // NOTE: clientUploads is deliberately OFF. With it on, the browser uploads
+      // straight to Blob, then Payload's create immediately re-fetches the
+      // file's public URL to read its dimensions — but that URL hasn't
+      // propagated yet (404), so image-size gets an empty buffer and every
+      // upload fails with a 400. Server-side uploads keep the buffer in memory
+      // (no race) and let Payload's native formatOptions/resizeOptions run.
+      // Trade-off: Vercel caps the request body at 4.5MB — fine for web images.
     }),
   ],
   typescript: {
