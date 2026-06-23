@@ -37,3 +37,8 @@ next-env.d.ts
 
 # payload local media (when Blob disabled in dev)
 /media
+
+# local scratch / upload-test artifacts
+/test-upload.png
+/gen-test-image.mjs
+/.playwright-mcp
