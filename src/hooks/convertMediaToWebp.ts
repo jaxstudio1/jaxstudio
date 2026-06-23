@@ -31,9 +31,6 @@ const CONVERTIBLE = new Set([
 ])
 
 export const convertMediaToWebp: CollectionAfterChangeHook = async ({ doc, req }) => {
-  // Re-entrancy guard — the payload.update() below re-fires afterChange.
-  if (req.context?.skipWebpConversion) return doc
-
   const token = process.env.BLOB_READ_WRITE_TOKEN
   // No token → local dev (files on disk, clientUploads off). Nothing to do.
   if (!token) return doc
@@ -64,39 +61,38 @@ export const convertMediaToWebp: CollectionAfterChangeHook = async ({ doc, req }
       .toBuffer({ resolveWithObject: true })
 
     const webpFilename = `${filename.replace(/\.[^./\\]+$/, '')}.webp`
+    // Keep doc.url's existing shape (a relative /api/media/file/<name> proxy
+    // path when access control is on) and just swap the filename, so links
+    // stay consistent with how the plugin generates every other media URL.
+    const newUrl = url.replace(filename, webpFilename)
 
-    // 3. Upload the WebP under the new key. Matches the plugin's scheme
-    //    (public, no random suffix) so generateURL resolves it correctly.
-    const { url: newUrl } = await put(webpFilename, data, {
+    // 3. Upload the WebP under the new key (public, no random suffix → blob
+    //    pathname === filename, matching the plugin's scheme).
+    await put(webpFilename, data, {
       access: 'public',
       addRandomSuffix: false,
       contentType: 'image/webp',
       token,
     })
 
-    // 4. Persist new metadata. Mirror the cloud-storage plugin's re-entrancy
-    //    pattern: flag req.context and clear req.file so no hook re-uploads.
-    if (!req.context) req.context = {}
-    req.context.skipWebpConversion = true
-    req.file = undefined
-    try {
-      await req.payload.update({
-        collection: 'media',
-        id: doc.id,
-        data: {
-          filename: webpFilename,
-          mimeType: 'image/webp',
-          filesize: info.size,
-          width: info.width,
-          height: info.height,
-        },
-        depth: 0,
-        req,
-        overrideAccess: true,
-      })
-    } finally {
-      delete req.context.skipWebpConversion
-    }
+    // 4. Rewrite the doc via the low-level DB adapter. payload.update() would
+    //    make the upload pipeline treat the filename change as a re-upload,
+    //    fail to find a file buffer, and poison the create's transaction
+    //    ("There was a problem while uploading the file"). db.updateOne skips
+    //    that pipeline (and the afterChange hooks, avoiding re-entrancy).
+    await req.payload.db.updateOne({
+      collection: 'media',
+      where: { id: { equals: doc.id } },
+      data: {
+        filename: webpFilename,
+        mimeType: 'image/webp',
+        filesize: info.size,
+        width: info.width,
+        height: info.height,
+        url: newUrl,
+      },
+      req,
+    })
 
     // 5. Drop the now-orphaned original to actually reclaim space.
     if (webpFilename !== filename) {
